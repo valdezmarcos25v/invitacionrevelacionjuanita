@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación - Revelación de Género</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #fdf6ec 0%, #f3e5f5 50%, #e3f2fd 100%);
+            color: #3d3d3d;
+            padding: 25px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .contenedor {
+            max-width: 500px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 2px solid #f0e6d8;
+        }
+
+        /* Encabezado */
+        .portada {
+            background: linear-gradient(135deg, #f8bbd0 0%, #e1bee7 50%, #bbdefb 100%);
+            padding: 45px 25px;
+            text-align: center;
+            color: #2c2c2c;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            color: #5c4b51;
+        }
+
+        .portada h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #2b2b2b;
+        }
+
+        .portada p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Secciones internas */
+        .seccion {
+            padding: 28px 25px;
+            text-align: center;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .seccion:last-child {
+            border-bottom: none;
+        }
+
+        .seccion h2 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #4a4a4a;
+        }
+
+        .mensaje {
+            line-height: 1.65;
+            color: #555;
+            font-size: 0.98rem;
+        }
+
+        /* Cuenta regresiva */
+        .contador {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .caja-tiempo {
+            background: #faf6f0;
+            border: 1px solid #eadbc8;
+            border-radius: 12px;
+            padding: 12px 10px;
+            min-width: 72px;
+        }
+
+        .caja-tiempo span {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #6d4c41;
+        }
+
+        .caja-tiempo small {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* Datos del evento */
+        .info-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .dato-item {
+            background: #f9f9fb;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border-left: 4px solid #ce93d8;
+            font-size: 0.95rem;
+        }
+
+        .dato-item strong {
+            display: block;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .btn-mapa {
+            display: inline-block;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #f8bbd0 0%, #e1bee7 50%, #bbdefb 100%);
+
+            color: black;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-mapa:hover {
+            background: #2b6cb0;
+        }
+
+        /* Votación Team Niño / Team Niña */
+        .equipos {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn-team {
+            flex: 1;
+            padding: 14px 10px;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-team:hover {
+            transform: translateY(-2px);
+        }
+
+        .team-nina {
+            background: #f3ccd9;
+            color: #fc046ff8;
+            border-color: #f8bbd0;
+        }
+
+        .team-nino {
+            background: #aad6f5;
+            color: #177ef3;
+            border-color: #bbdefb;
+        }
+
+        .respuesta-voto {
+            margin-top: 14px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            min-height: 22px;
+            color: #444;
+        }
+
+        /* Vestimenta y confirmación */
+        .vestimenta-box {
+            background: #fff8e1;
+            border: 1px dashed #ffd54f;
+            border-radius: 14px;
+            padding: 15px;
+            font-size: 0.93rem;
+            color: #5d4037;
+            line-height: 1.5;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            margin-top: 15px;
+                     background: linear-gradient(135deg, #f8bbd0 0%, #e1bee7 50%, #bbdefb 100%);
+
+            color: black;
+            text-decoration: none;
+            padding: 13px 26px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.98rem;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.25);
+            transition: background 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        .pie {
+            background: #fafafa;
+            padding: 18px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <!-- 1. Portada -->
+        <div class="portada">
+            <div class="etiqueta">🩵 Gran Misterio 🩷</div>
+            <h1>¿Niño o Niña?</h1>
+            <p>Muy pronto descubriremos juntos el secreto mejor guardado</p>
+        </div>
+
+        <!-- 2. Carta / Mensaje -->
+        <div class="seccion">
+            <h2>Una dulce espera</h2>
+            <p class="mensaje">
+                Con el corazón lleno de ilusión queremos invitarte a vivir con nosotros uno de los momentos más emocionantes de nuestras vidas.
+                Ven con tu mejor intuición, mucha alegría y ganas de celebrar la llegada de nuestro bebé.
+            </p>
+        </div>
+
+        <!-- 3. Cuenta regresiva -->
+        <div class="seccion">
+            <h2>Falta muy poco para saberlo</h2>
+            <div class="contador">
+                <div class="caja-tiempo">
+                    <span id="dias">00</span>
+                    <small>Días</small>
+                </div>
+                <div class="caja-tiempo">
+                    <span id="horas">00</span>
+                    <small>Horas</small>
+                </div>
+                <div class="caja-tiempo">
+                    <span id="minutos">00</span>
+                    <small>Min</small>
+                </div>
+                <div class="caja-tiempo">
+                    <span id="segundos">00</span>
+                    <small>Seg</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Cuándo y Dónde con botón a Google Maps -->
+        <div class="seccion">
+            <h2>Detalles del encuentro</h2>
+            <div class="info-grid">
+                <div class="dato-item">
+                    <strong>📅 Fecha</strong>
+                    Sabado 28 de Noviembre de 2026
+                </div>
+                <div class="dato-item">
+                    <strong>⏰ Horario</strong>
+                    18:00 hs (La revelación será a las 19:00 hs)
+                </div>
+                <div class="dato-item">
+                    <strong>📍 Lugar</strong>
+                    En la casa de Rosi Mendieta:
+                    alado de la Capilla San José.
+                    <br>
+                    <!-- Reemplaza el href con el enlace exacto de "Compartir" de Google Maps -->
+                    <a class="btn-mapa" href="https://maps.app.goo.gl/EePbLLe5zLpEJzDv7" target="_blank">
+                        🗺️ click aqui para ver la ubicación Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Elige tu equipo (sin revelar el secreto) -->
+        <div class="seccion">
+            <h2>¿Cuál es tu corazonada?</h2>
+            <p class="mensaje">Elige tu equipo antes de venir:</p>
+            <div class="equipos">
+                <button class="btn-team team-nina" onclick="elegirEquipo('nina')">🩷 Team Niña</button>
+                <button class="btn-team team-nino" onclick="elegirEquipo('nino')">💙 Team Niño</button>
+            </div>
+            <div class="respuesta-voto" id="mensajeVoto"></div>
+        </div>
+
+        <!-- 6. Código de vestimenta y Confirmación -->
+        <div class="seccion">
+            <h2>Código de Vestimenta</h2>
+            <div class="vestimenta-box">
+                Viste de <strong>rosa</strong> si crees que será niña, de <strong>celeste</strong> si crees que será niño,
+                o de <strong>blanco / beige</strong> si prefieres mantenerte neutral.
+            </div>
+
+            <a id="linkConfirmar" class="btn-whatsapp" href="#" target="_blank">
+               Click Confirmar asistencia por WhatsApp
+            </a>
+        </div>
+
+        <div class="pie">
+            ¡Te esperamos para descubrirlo juntos! 🤍
+        </div>
+    </div>
+
+    <script>
+        // Configura aquí la fecha y hora real del evento (Año, Mes-1, Día, Hora, Minuto)
+        const fechaEvento = new Date(2026, 10, 28, 18, 0, 0).getTime();
+
+        function actualizarContador() {
+            const ahora = new Date().getTime();
+            const diferencia = fechaEvento - ahora;
+
+            if (diferencia <= 0) {
+                document.getElementById("dias").innerText = "00";
+                document.getElementById("horas").innerText = "00";
+                document.getElementById("minutos").innerText = "00";
+                document.getElementById("segundos").innerText = "00";
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerText = String(dias).padStart(2, "0");
+            document.getElementById("horas").innerText = String(horas).padStart(2, "0");
+            document.getElementById("minutos").innerText = String(minutos).padStart(2, "0");
+            document.getElementById("segundos").innerText = String(segundos).padStart(2, "0");
+        }
+
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+
+        // Interacción para elegir equipo sin revelar el género
+        let equipoSeleccionado = "Sin definir aún";
+
+        function elegirEquipo(equipo) {
+            const texto = document.getElementById("mensajeVoto");
+            if (equipo === "nina") {
+                equipoSeleccionado = "Team Niña 🩷";
+                texto.innerText = "¡Anotado! Ven con algo rosa para apoyar al Team Niña 🩷";
+            } else {
+                equipoSeleccionado = "Team Niño 💙";
+                texto.innerText = "¡Anotado! Ven con algo celeste para apoyar al Team Niño 💙";
+            }
+            actualizarEnlaceWhatsApp();
+        }
+
+        function actualizarEnlaceWhatsApp() {
+            // Cambia el número por tu WhatsApp real (código de país + número sin +)
+            const telefono = "595984467173";
+            const mensaje = `¡Hola! Confirmo mi asistencia a la Revelación de Género.\n👤 Nombre: \n 👤¿Ya colaboraste?: Mi voto es: ${equipoSeleccionado}`;
+            document.getElementById("linkConfirmar").href =
+                `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+        }
+
+        actualizarEnlaceWhatsApp();
+    </script>
+
+</body>
+</html>
